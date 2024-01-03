@@ -1,16 +1,27 @@
 # cmd_test
+using
+```process_run: ^0.13.3```
+process run package is used to get 'outText'.
+Alternatively can use stdout of Process.
 
-A new Flutter project.
+this code makes .venv python virtual environment, and install numpy on it.
 
-## Getting Started
+## cmd example
+```dart
+await Process.run("python", ["-m", "venv", ".venv"], workingDirectory: "./pysupport",
+      runInShell: true);
+```
+this code runs ```python -m venv .venv```
 
-This project is a starting point for a Flutter application.
+## run in virtual environment
+using ```env``` parameter, code can run in virtual environment.
+function getting virtual environment is defined as ```getEnvironment()``` at m```main.dart```.
+### example
+```dart
+var env = await getEnvironment();
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+await Process.run(
+        commandHead, commandSplit, workingDirectory: "./pysupport",
+        environment: env,
+        runInShell: true);
+```
